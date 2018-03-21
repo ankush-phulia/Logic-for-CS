@@ -1,0 +1,44 @@
+Satisfiable : false
+
+Satisfiable : false
+
+Satisfiable : false
+
+Satisfiable : true
+
+Satisfiable : false
+
+Satisfiable : true
+
+Satisfiable : true
+
+Satisfiable : true
+
+Satisfiable : false
+
+Satisfiable : true
+
+Satisfiable : false
+
+Satisfiable : false
+
+Satisfiable : false
+
+Satisfiable : false
+
+Satisfiable : true
+
+Satisfiable : false
+
+Satisfiable : true
+
+Satisfiable : true
+
+Satisfiable : true
+
+Satisfiable : true
+
+Satisfiable : false
+
+Satisfiable : true
+

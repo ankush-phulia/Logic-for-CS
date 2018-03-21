@@ -1,0 +1,79 @@
+open DataType
+
+fun merge (ATOM("")) = ""
+    | merge (ATOM(X)) = " " ^ X
+
+%%
+
+%arg (fname) : string
+%eop EOF 
+%pos int
+
+%right IFF
+%left OR
+%left AND
+%nonassoc NOT
+%nonassoc TOP BOT
+
+%term EOF 
+    | TOP | BOT
+	| ATO of string
+    | WS of string
+    | LPAR | RPAR
+	| NOT
+	| AND  | OR
+    | IFF
+    | IF   | THEN | ELSE
+
+%nonterm PROP of Prop
+        | PROP7 of Prop
+        | PROP2 of Prop
+        | PROP3 of Prop
+        | PROP4 of Prop
+        | PROP5 of Prop
+        | PROP6 of Prop
+        | START of Prop | ATTO of Prop
+
+%name PropLogic
+%start START
+%noshift EOF
+%verbose
+
+%%
+
+START : PROP                                (PROP)
+        | WS PROP                           (PROP)
+
+PROP : PROP7 IFF PROP                       (IFF(PROP7, PROP))
+        | LPAR PROP RPAR                    (PROP)
+        | PROP7                             (PROP7)
+
+PROP7 : IF PROP7 THEN PROP7                 (IMP(PROP7, PROP72))
+        | IF PROP7 THEN PROP2 ELSE PROP7    (ITE(PROP7, PROP2, PROP72))
+        | PROP3                             (PROP3)
+        | LPAR PROP RPAR                    (PROP)
+
+PROP2 : IF PROP7 THEN PROP2 ELSE PROP2      (ITE(PROP7, PROP2, PROP22)) 
+        | PROP3                             (PROP3) 
+        | LPAR PROP RPAR                    (PROP)
+
+PROP3 : PROP3 OR PROP4                      (OR(PROP3, PROP4)) 
+        | PROP4                             (PROP4) 
+        | LPAR PROP RPAR                    (PROP)
+
+PROP4 : PROP4 AND PROP5                     (AND(PROP4, PROP5)) 
+        | PROP5                             (PROP5) 
+        | LPAR PROP RPAR                    (PROP)
+
+PROP5 : NOT PROP5                           (NOT(PROP5)) 
+        | PROP6                             (PROP6) 
+        | LPAR PROP RPAR                    (PROP)
+
+PROP6 : TOP                                 (TOP) 
+        | BOT                               (BOTTOM) 
+        | ATTO                              (ATTO)
+
+ATTO :  ATO ATTO                            (ATOM(ATO ^ (merge ATTO)))
+        | ATO WS ATTO                       (ATOM(ATO ^ WS ^ (merge ATTO)))
+        | ATO WS                            (ATOM(ATO))
+        | ATO                               (ATOM(ATO))
