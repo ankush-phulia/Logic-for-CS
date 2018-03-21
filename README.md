@@ -1,2 +1,6 @@
 # COL-703
-Logic for CS course projects
+Projects done in Logic for CS, 2017
+
+1. Scanning-Parsing statements in Propositional Logic
+2. Resolution in Propositional Logic
+3. Resolution in First-Order Logic
