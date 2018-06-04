@@ -2,11 +2,12 @@ use "DataType.sml"
 
 open FOL;
 Control.Print.printDepth := 100;
-val v = FORALL ("z", (EXISTS("u", AND1(OR1(FORALL("r", (EXISTS("p", PRED("W", [FUNC("f3", [FUNC("f4", [VAR("x"), VAR("p")]), VAR("r")])])))), PRED("P",[VAR("x")])), PRED("Q",[FUNC("f", [VAR("y"),VAR("u"),VAR("z")])])))));
 
-
+(* val v = FORALL ("z", (EXISTS("u", AND1(OR1(FORALL("r", (EXISTS("p", PRED("W", [FUNC("f3", [FUNC("f4", [VAR("x"), VAR("p")]), VAR("r")])])))), PRED("P",[VAR("x")])), PRED("Q",[FUNC("f", [VAR("y"),VAR("u"),VAR("z")])])))));
+ *)
 (*val form = AND1(FORALL("X", TOP1), FORALL("Y", BOTTOM1));*)
-(*fun output (outfile:string, inputfile: string) =
+
+fun output (outfile:string, inputfile: string) =
     let 
       val outstream = TextIO.openAppend (outfile)
       val AST = PropLogic.compile (inputfile)
@@ -43,5 +44,5 @@ val args = CommandLine.arguments();
 val infile = (hd args);
 val outfile = hd (tl args);
 
-val done = LinesToOutput (outfile, infile);*)
+val done = LinesToOutput (outfile, infile);
 
